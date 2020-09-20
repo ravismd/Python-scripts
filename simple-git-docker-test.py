@@ -16,6 +16,11 @@ if (os.system('pgrep dockerd') == 0):
 else: 
     print("Dcoker is already in stopped state")
 
+if (os.path.exists("/opt/docker")):
+    print("Path is already there")
+else:
+    os.system('mkdir /opt/docker')
+
 os.chdir('/opt/docker')
 os.system('cp /home/ec2-user/HelloWorld/Dockerfile .')
 os.system("aws s3 cp s3://ananya123/webapp.war .")
