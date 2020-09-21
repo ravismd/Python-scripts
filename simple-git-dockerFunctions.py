@@ -27,12 +27,17 @@ def stop_dockerServices():
 
 #create docker folder in /opt and copy the required files to build docker images and containers
 def env_paths():
-	print("\nCreating Env Paths tight in place like /opt/docker etc..")
+	print("\nCreating Env Paths right in place like /opt/docker etc..")
     	print("========================================================== ")
 	if (os.path.exists("/opt/docker")):
     		print("Path is already there")
 	else:
     		os.system('mkdir /opt/docker')
+
+	if (os.path.exists("/usr/bin/docker")):
+		print("Congratulations...docker is already installed not sure when... \n")
+	else:
+		os.system('yum install docker -y')
 	os.chdir('/opt/docker')
 	os.system('cp /home/ec2-user/HelloWorld/Dockerfile .')
 	os.system("aws s3 cp s3://ananya123/webapp.war .")
@@ -49,8 +54,8 @@ def start_docker_service():
 	os.system("docker build -t simple-devops-image .")
 	os.system("docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image")
 
+env_paths()
 stop_remove_dockerContainers()
 remove_dockerImages()
 stop_dockerServices()
-env_paths()
 start_docker_service()
