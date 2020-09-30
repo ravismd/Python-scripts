@@ -2,8 +2,8 @@
 #x = 5
 #y = 10
 
-#x = input('Enter the number x : ')
-x = input()
+x = input('Enter the number x : ')
+#x = input()
 y = input('Enter the number y : ')
 
 
